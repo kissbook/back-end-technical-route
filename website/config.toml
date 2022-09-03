@@ -14,7 +14,13 @@ rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输
 disqusShortname = ""      # disqus_shortname
 googleAnalytics = "G-G4C429E050"      # UA-XXXXXXXX-X
 copyright = "后端技术"     # default: author.name ↓        # 默认为下面配置的author.name ↓
+enableGitInfo = true
 uglyURLs = false
+
+PygmentsCodeFences = true # Enable syntax highlighting with GitHub flavoured code fences
+PygmentsUseClasses = true # Use CSS classes to format highlighted code
+PygmentsCodefencesGuessSyntax = true
+PygmentsOptions = "linenos=table"
 
 # language support # en / zh-cn / other... translations present in i18n/
 defaultContentLanguage = "zh-cn"  # 默认使用的语言
@@ -59,6 +65,13 @@ since = "2022"            # Site creation time          # 站点建立时间
 homeFullContent = false   # if false, show post summaries on home page. Otherwise show full content.
 rssFullContent = true     # if false, Rss feed instead of the summary
 archive-paginate = 1000
+showMenuLanguageChooser = true
+showAuthorInfo = true
+
+[params.utteranc]         # utteranc is a comment system based on GitHub issues. see https://utteranc.es
+enable = true
+repo = "kissbook/back-end-technical-route"    # The repo to store comments
+issueTerm = "pathname"
 
 # site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
 logoTitle = "后端技术"        # default: the title value    # 默认值: 上面设置的title值
