@@ -4,10 +4,6 @@ date: 2022-09-03T15:13:00+08:00
 tags: ["GO", "HTML"]
 categories: ["后端"]
 author: "张伟"
-comment: true
-toc: true
-reward: true
-mathjax: true
 ---
 
 
