@@ -1,4 +1,4 @@
-baseURL = "https://kissbook.github.io/back-end-technical-route/"
+baseURL = "https://blog.jtyoui.com/"
 title = "吻书 - 后端技术分享博客"
 enableRobotsTXT = true
 enableEmoji = true
@@ -132,7 +132,7 @@ issueTerm = "pathname"
 
 [params.reward]
 enable = true
-wechat = "https://github.com/kissbook/back-end-technical-route/blob/website/img/微信.jpg"
+wechat = "/img/微信赞赏.jpg"
 
 [params.counter.busuanzi]
 enable = true

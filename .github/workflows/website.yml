@@ -3,7 +3,7 @@ name: 部署《后端技术路线》
 on:
   push:
     branches:
-      - main      # 当dev分支更新就触发操作
+      - main      # 当main分支更新就触发操作
     paths-ignore: # 下列文件的变更不触发部署，可以自行添加
       - README.md
       - LICENSE
