@@ -1,85 +1,138 @@
-# This is a simple configuration.
-# If you want to see the full configuration, please check `full-config.toml` .
-# And see https://gohugo.io/getting-started/configuration/ .
-
 baseURL = "https://kissbook.github.io/back-end-technical-route/"
 title = "吻书 - 后端技术分享博客"
 enableRobotsTXT = true
 enableEmoji = true
 theme = "hugo-theme-jane"
-
-hasCJKLanguage = true     # has chinese/japanese/korean ? # 自动检测是否包含 中文\日文\韩文
-paginate = 10              # Number of articles displayed on the homepage  # 首页每页显示的文章数
-rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输出数量
-disqusShortname = ""      # disqus_shortname
-googleAnalytics = "G-G4C429E050"      # UA-XXXXXXXX-X
-copyright = "后端技术"     # default: author.name ↓        # 默认为下面配置的author.name ↓
+mainSections = ["post"]
+hasCJKLanguage = true
+paginate = 10
+rssLimit = 20
+disqusShortname = ""
+googleAnalytics = "G-G4C429E050"
+copyright = "后端技术"
+enableGitInfo = true
 uglyURLs = false
+PygmentsCodeFences = true
+PygmentsUseClasses = true
+PygmentsCodefencesGuessSyntax = true
+PygmentsOptions = "linenos=table"
+defaultContentLanguage = "zh-cn"
 
-# language support # en / zh-cn / other... translations present in i18n/
-defaultContentLanguage = "zh-cn"  # 默认使用的语言
-[Languages.zh-cn]
-languageCode = "zh-cn"
-
-[author]                  # essential                     # 必需
+[author]
 name = "张伟"
 
-[sitemap]                 # essential                     # 必需
+[sitemap]
 changefreq = "weekly"
 priority = 0.5
 filename = "sitemap.xml"
 
-[[menu.main]]             # config your menu              # 配置目录
-name = "首页"
+[langusges]
+[languages.en]
+title = "KissBook - Backend Technology Sharing Blog"
+languageName = "English"
+weight = 1
+[languages.zh-cn]
+title = "吻书 - 后端技术分享博客"
+languageName = "中文"
+weight = 2
+
+[[languages.en.menu.main]]
+name = "Home"
+weight = 10
+identifier = "home"
+url = "/en"
+[[languages.en.menu.main]]
+name = "Archives"
+weight = 20
+identifier = "archives"
+url = "/en/post/"
+[[languages.en.menu.main]]
+name = "Tags"
+weight = 30
+identifier = "tags"
+url = "/en/tags/"
+[[languages.en.menu.main]]
+name = "Categories"
+weight = 40
+identifier = "categories"
+url = "/en/categories/"
+
+[[languages.zh-cn.menu.main]]
+name = "主页"
 weight = 10
 identifier = "home"
 url = "/"
-
-[[menu.main]]
-name = "文章"
+[[languages.zh-cn.menu.main]]
+name = "归档"
 weight = 20
 identifier = "archives"
 url = "/post/"
-
-[[menu.main]]
+[[languages.zh-cn.menu.main]]
 name = "标签"
 weight = 30
 identifier = "tags"
 url = "/tags/"
-
-[[menu.main]]
-name = "目录"
+[[languages.zh-cn.menu.main]]
+name = "分类"
 weight = 40
 identifier = "categories"
 url = "/categories/"
 
 
 [params]
-since = "2022"            # Site creation time          # 站点建立时间
-homeFullContent = false   # if false, show post summaries on home page. Otherwise show full content.
-rssFullContent = true     # if false, Rss feed instead of the summary
-archive-paginate = 1000
-
-# site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
-logoTitle = "后端技术"        # default: the title value    # 默认值: 上面设置的title值
-keywords = ["Java", "Go", "后端技术"]
+since = "2022"
+homeFullContent = false
+rssFullContent = true
+archive-paginate = 30
+showMenuLanguageChooser = true
+showAuthorInfo = true
+toc = true
+photoswipe = true
+mathjax = true
+katex = true
+comment = true
+logoTitle = "后端技术"
+keywords = ["Java", "Go", "后端技术", "博客", "笔记"]
 description = "这是一个后端技术博客"
-
-# The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
 dateFormatToUse = "2006-01-02"
-
-# 一些全局开关，你也可以在每一篇内容的 front matter 中针对单篇内容关闭或开启某些功能，在 archetypes/default.md 查看更多信息。
-# Some global options, you can also close or open something in front matter for a single post, see more information from `archetypes/default.md`.
-toc = true                                                                            # 是否开启目录
-photoswipe = true         # see https://github.com/dimsemenov/PhotoSwipe            # 是否启用PhotoSwipe（图片可点击）
-contentCopyright = '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a>'
+contentCopyright = '原创文章，如需转载请注明文章作者和出处。谢谢！'
 moreMeta = true
-
-# Link custom CSS and JS assets
-#   (relative to /static/css and /static/js respectively)
 customCSS = []            # if ['custom.css'], load '/static/css/custom.css' file
 customJS = []             # if ['custom.js'], load '/static/js/custom.js' file
 
-[params.social]                                         # 社交链接
+[params.publicCDN]
+enable = true
+jquery = '<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>'
+slideout = '<script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>'
+gitmentJS = '<script src="https://cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js" crossorigin="anonymous"></script>'
+gitmentCSS = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css" crossorigin="anonymous">'
+photoswipe = '<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.js" integrity="sha256-AC9ChpELidrhGHX23ZU53vmRdz3FhKaN9E28+BbcWBw=" crossorigin="anonymous"></script>'
+photoswipeUI = '<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js" integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin="anonymous"></script>'
+photoswipeCSS = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css" integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin="anonymous">'
+photoswipeSKIN = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css" integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin="anonymous">'
+
+
+[params.search.google]
+enable = true
+id = "c1253cf00539a4eb0"
+title = "Search"
+
+[params.social]
 a-email = "jtyoui@qq.com"
 g-github = "https://github.com/kissbook/back-end-technical-route"
+
+[params.gitInfo]
+gitRepo = "https://github.com/kissbook/back-end-technical-route"
+showCommitMessage = true
+
+[params.utteranc]
+enable = true
+repo = "kissbook/back-end-technical-route"
+issueTerm = "pathname"
+
+[params.reward]
+enable = true
+wechat = "https://github.com/kissbook/back-end-technical-route/blob/website/img/微信.jpg"
+
+[params.counter.busuanzi]
+enable = true
