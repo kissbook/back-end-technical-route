@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://kissbook.github.io/back-end-technical-route/sitemap.xml
+Sitemap: https://blog.jtyoui.com/sitemap.xml
