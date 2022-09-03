@@ -1,30 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>吻书 - 后端技术分享博客</title><link>https://kissbook.github.io/back-end-technical-route/</link><description>Recent content on 吻书 - 后端技术分享博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>后端技术</copyright><lastBuildDate>Sat, 03 Sep 2022 15:13:00 +0800</lastBuildDate><atom:link href="https://kissbook.github.io/back-end-technical-route/index.xml" rel="self" type="application/rss+xml"/><item><title>Go代理静态页面</title><link>https://kissbook.github.io/back-end-technical-route/post/go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2/</link><pubDate>Sat, 03 Sep 2022 15:13:00 +0800</pubDate><guid>https://kissbook.github.io/back-end-technical-route/post/go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2/</guid><description>&lt;p>基于Go语言实现的静态网页加载，甚至可以自动打包到二进制文件中去,使用特别简单，联合Gin实现高并发性能&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>吻书 - 后端技术分享博客</title><link>https://kissbook.github.io/back-end-technical-route/</link><description>Recent content on 吻书 - 后端技术分享博客</description><generator>Hugo -- gohugo.io</generator><copyright>后端技术</copyright><lastBuildDate>Sat, 03 Sep 2022 15:13:00 +0800</lastBuildDate><atom:link href="https://kissbook.github.io/back-end-technical-route/index.xml" rel="self" type="application/rss+xml"/><item><title>Go代理静态页面</title><link>https://kissbook.github.io/back-end-technical-route/post/go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2/</link><pubDate>Sat, 03 Sep 2022 15:13:00 +0800</pubDate><guid>https://kissbook.github.io/back-end-technical-route/post/go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2/</guid><description>&lt;p>基于Go语言实现的静态网页加载，甚至可以自动打包到二进制文件中去,使用特别简单，联合Gin实现高并发性能&lt;/p>
 &lt;h2 id="1-安装">1. 安装&lt;/h2>
 &lt;pre>&lt;code> go get github.com/gounits/gohtml
 &lt;/code>&lt;/pre>
 &lt;h2 id="2-使用">2. 使用&lt;/h2>
 &lt;p>&lt;img src="https://kissbook.github.io/back-end-technical-route/img/Go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2-%E7%9B%AE%E5%BD%95.png" alt="img.png">&lt;/p>
 &lt;p>fs文件夹是存放web静态文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-golang" data-lang="golang">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;embed&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;github.com/gin-gonic/gin&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;github.com/gounits/gohtml&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">//go:embed fs
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">efs&lt;/span> &lt;span style="color:#a6e22e">embed&lt;/span>.&lt;span style="color:#a6e22e">FS&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">r&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">Default&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">r&lt;/span>.&lt;span style="color:#a6e22e">Use&lt;/span>(&lt;span style="color:#a6e22e">gohtml&lt;/span>.&lt;span style="color:#a6e22e">NewFs&lt;/span>(&lt;span style="color:#a6e22e">efs&lt;/span>))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">//r.Use(gohtml.New(&amp;#34;fs&amp;#34;))
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">r&lt;/span>.&lt;span style="color:#a6e22e">Run&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;:8080&amp;#34;&lt;/span>); &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> panic(&lt;span style="color:#a6e22e">err&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://kissbook.github.io/back-end-technical-route/img/Go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2-HTML.png" alt="img_2.png">&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-golang" data-lang="golang">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;embed&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;github.com/gin-gonic/gin&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;github.com/gounits/gohtml&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//go:embed fs
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">efs&lt;/span> &lt;span class="nx">embed&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">FS&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">r&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">gin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Default&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">r&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">gohtml&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">NewFs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">efs&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//r.Use(gohtml.New(&amp;#34;fs&amp;#34;))
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">r&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;:8080&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">panic&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">err&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://kissbook.github.io/back-end-technical-route/img/Go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2-HTML.png" alt="img_2.png">&lt;/p>
 &lt;h2 id="3-打开浏览器">3. 打开浏览器&lt;/h2>
 &lt;pre>&lt;code>click http://localhost:8080/ 如果访问到下面，说明执行成功！
 &lt;/code>&lt;/pre>
