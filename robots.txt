@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://localhost:1313/sitemap.xml
+Sitemap: https://kissbook.github.io/back-end-technical-route/sitemap.xml
