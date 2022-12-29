@@ -15,7 +15,7 @@ author: "张伟"
 
 ## 2. 使用
 
-![img.png](/img/Go代理静态页面-目录.png)
+![img.png](/img/Golang/Go代理静态页面-目录.png)
 
 fs文件夹是存放web静态文件
 
@@ -42,10 +42,10 @@ func main() {
 
 ```
 
-![img_2.png](/img/Go代理静态页面-HTML.png)
+![img_2.png](/img/Golang/Go代理静态页面-HTML.png)
 
 ## 3. 打开浏览器
 
     click http://localhost:8080/ 如果访问到下面，说明执行成功！
 
-![img_1.png](/img/Go代理静态页面-打开成功.png)
+![img_1.png](/img/Golang/Go代理静态页面-打开成功.png)
