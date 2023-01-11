@@ -1,4 +1,247 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>吻书 - 后端技术分享博客</title><link>https://blog.jtyoui.com/</link><description>Recent content on 吻书 - 后端技术分享博客</description><generator>Hugo -- gohugo.io</generator><copyright>后端技术</copyright><lastBuildDate>Tue, 27 Dec 2022 15:56:00 +0800</lastBuildDate><atom:link href="https://blog.jtyoui.com/index.xml" rel="self" type="application/rss+xml"/><item><title>基本数据类型</title><link>https://blog.jtyoui.com/post/pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link><pubDate>Tue, 27 Dec 2022 15:56:00 +0800</pubDate><guid>https://blog.jtyoui.com/post/pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid><description>&lt;h1 id="1张量tensor">1、张量（Tensor）&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>吻书 - 后端技术分享博客</title><link>https://blog.jtyoui.com/</link><description>Recent content on 吻书 - 后端技术分享博客</description><generator>Hugo -- gohugo.io</generator><copyright>后端技术</copyright><lastBuildDate>Thu, 29 Dec 2022 10:32:00 +0800</lastBuildDate><atom:link href="https://blog.jtyoui.com/index.xml" rel="self" type="application/rss+xml"/><item><title>激活函数</title><link>https://blog.jtyoui.com/post/pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/</link><pubDate>Thu, 29 Dec 2022 10:32:00 +0800</pubDate><guid>https://blog.jtyoui.com/post/pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/</guid><description>&lt;h1 id="1激活函数含义">1、激活函数含义&lt;/h1>
+&lt;h2 id="11什么是激活函数">1.1、什么是激活函数？&lt;/h2>
+&lt;p>激活函数是人为增加的一种功能，这种功能也被称为“传递函数”，目的是为了增加函数的“非线性能力”。&lt;/p>
+&lt;h2 id="12为什么要用激活函数">1.2、为什么要用激活函数？&lt;/h2>
+&lt;p>如果不用激活函数，那么无论神经网络是多少层，输出都是一个“线性变化”。这种情况就是原始的“感知机”。
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.svg" alt="神经网络">
+如果使用了激活函数，神经元就会逼近任何的“非线性函数”。这样模型有更多的拟合能力。&lt;/p>
+&lt;p>下面的图表示线性分割的图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BA%BF%E6%80%A7%E5%88%86%E5%89%B2.png" alt="线性分割">&lt;/p>
+&lt;p>实际上我们其实想要的是这样的分割线
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%88%86%E5%89%B2.png" alt="img.png">&lt;/p>
+&lt;p>【注意】如果我们不用激活函数，就单纯的想增加隐藏层，能否达到类似激活函数的效果？
+答案是：否&lt;/p>
+&lt;p>因为增加层数，就会单纯的增加Wx+b的个数，线性函数有一个特性：两个线性相加还是等于线性函数。
+所以无论多少个Wx+b都可以合并同类型。变成一个更大的W'x+b'这样的形式&lt;/p>
+&lt;h2 id="13什么是线性函数">1.3、什么是线性函数&lt;/h2>
+&lt;p>线性函数的解释：只要满足线性关系的都叫线性函数
+满足两个关系：假如有这样的关系：
+$$
+f(x) = y
+$$&lt;/p>
+&lt;p>$$
+1、f(x_i)=y_i \ 且 \ f(x_1+x_2)=y_1+y_2
+$$&lt;/p>
+&lt;p>$$
+2、f(K*x)=K*y \ 且 \ K是一个常数
+$$&lt;/p>
+&lt;p>满足这样的关系的函数，就叫线性函数。&lt;/p>
+&lt;h1 id="2激活函数的种类">2、激活函数的种类&lt;/h1>
+&lt;h2 id="21单变量输入激活函数">2.1、单变量输入激活函数&lt;/h2>
+&lt;h3 id="211恒等函数">2.1.1、恒等函数&lt;/h3>
+&lt;p>定义：设M为一集合，于M上的恒等函数f被定义于一具有定义域和陪域M的函数，其对任一M内的元素x，会有f(x)=x的关系。&lt;/p>
+&lt;p>图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%81%92%E7%AD%89%E5%87%BD%E6%95%B0.png" alt="恒等函数">&lt;/p>
+&lt;p>原函数：
+$$
+f(x) =x
+$$
+导函数：
+$$
+f'(x)=1
+$$&lt;/p>
+&lt;h3 id="212单位阶跃函数">2.1.2、单位阶跃函数&lt;/h3>
+&lt;p>定义：又称赫维赛德阶跃函数，通常用 H 或 θ 表记，有时也会用 u、1 或 𝟙 表记，是一个由奥利弗·亥维赛提出的阶跃函数，参数为负时值为0，参数为正时值为1。&lt;/p>
+&lt;p>图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%8D%95%E4%BD%8D%E9%98%B6%E8%B7%83%E5%87%BD%E6%95%B0.png" alt="单位阶跃函数">
+原函数：&lt;/p>
+&lt;p>$$
+f(x)=\begin{Bmatrix}
+0 \ x&amp;lt;0 \\
+1 \ x\geqslant 0 \\
+\end{Bmatrix}
+$$&lt;/p>
+&lt;p>导函数：&lt;/p>
+&lt;p>$$
+f'(x)=\begin{Bmatrix}
+0 \ x\neq 0 \\
+无 \ x=0 \\
+\end{Bmatrix}
+$$&lt;/p>
+&lt;h3 id="213逻辑函数">2.1.3、逻辑函数&lt;/h3>
+&lt;p>定义：
+一种常见的S型函数，其曲线逻辑斯谛曲线是一种S型曲线&lt;/p>
+&lt;p>图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E9%80%BB%E8%BE%91%E5%87%BD%E6%95%B0.png" alt="逻辑函数">&lt;/p>
+&lt;p>原函数：
+$$
+f(x)=\sigma(x) + \frac{1}{1+e^{-x}}
+$$
+导数
+$$
+f'(x) = f(x)(1-f(x))
+$$&lt;/p>
+&lt;h3 id="214双曲正切函数">2.1.4、双曲正切函数&lt;/h3>
+&lt;p>定义：
+双曲正弦一般计为 sinh,其在复变分析中定义为:
+$$
+{\displaystyle \sinh :z\mapsto {\frac {\mathrm {e} ^{z}-\mathrm {e} ^{-z}}{2}}}
+$$&lt;/p>
+&lt;p>图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%8F%8C%E6%9B%B2%E6%AD%A3%E5%88%87%E5%87%BD%E6%95%B0.png" alt="双曲正切函数">&lt;/p>
+&lt;p>原函数：
+$$
+{\displaystyle f(x)=\tanh(x)={\frac {(e^{x}-e^{-x})}{(e^{x}+e^{-x})}}}
+$$&lt;/p>
+&lt;p>导数：
+$$
+{\displaystyle f'(x)=1-f(x)^{2}}
+$$&lt;/p>
+&lt;h3 id="215反正切函数">2.1.5、反正切函数&lt;/h3>
+&lt;p>定义：
+反正切是一种反三角函数，是利用已知直角三角形的对边和邻边这两条直角边的比值求出其夹角大小的函数，是高等数学中的一种基本特殊函数。
+在三角学中，反正切被定义为一个角度，也就是正切值的反函数，由于正切函数在实数上不具有一一对应的关系，所以不存在反函数，
+但我们可以限制其定义域，因此，反正切是单射和满射也是可逆的，但不同于反正弦和反余弦，由于限制正切函数的定义域在
+$$
+{\displaystyle [-{\frac {\pi }{2}},{\frac {\pi }{2}}]}[-{\frac {\pi }{2}},{\frac {\pi }{2}}]
+$$
+时，其值域是全体实数，因此可得到的反函数定义域也是全体实数，而不必再进一步去限制定义域。&lt;/p>
+&lt;p>图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%8F%8D%E6%AD%A3%E5%88%87%E5%87%BD%E6%95%B0.png" alt="反正切函数">
+原函数：
+$$
+{\displaystyle f(x)=\tan ^{-1}(x)}
+$$
+导数：
+$$
+{\displaystyle f'(x)={\frac {1}{x^{2}+1}}}
+$$&lt;/p>
+&lt;h3 id="216softsign函数">2.1.6、Softsign函数&lt;/h3>
+&lt;p>图像：&lt;/p>
+&lt;p>&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/Softsign.png" alt="Softsign">&lt;/p>
+&lt;p>原函数：
+$$
+{\displaystyle f(x)={\frac {x}{1+|x|}}}
+$$&lt;/p>
+&lt;p>导数：
+$$
+{\displaystyle f'(x)={\frac {1}{(1+|x|)^{2}}}}
+$$&lt;/p>
+&lt;h3 id="217反平方根函数-isru">2.1.7、反平方根函数 (ISRU)&lt;/h3>
+&lt;p>图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%8F%8D%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%87%BD%E6%95%B0.png" alt="反平方根函数">&lt;/p>
+&lt;p>原函数：
+$$
+{\displaystyle f(x)={\frac {x}{\sqrt {1+\alpha x^{2}}}}}
+$$&lt;/p>
+&lt;p>导数：
+$$
+{\displaystyle f'(x)=\left({\frac {1}{\sqrt {1+\alpha x^{2}}}}\right)^{3}}
+$$&lt;/p>
+&lt;h3 id="218线性整流函数-relu">2.1.8、线性整流函数 (ReLU)&lt;/h3>
+&lt;p>图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%BA%BF%E6%80%A7%E6%95%B4%E6%B5%81%E5%87%BD%E6%95%B0.png" alt="线性整流函数">&lt;/p>
+&lt;p>原函数：
+$$
+{\displaystyle f(x)={\begin{cases}0&amp;amp;{\text{for }}x&amp;lt;0\\x&amp;amp;{\text{for }}x\geq 0\end{cases}}}
+$$&lt;/p>
+&lt;p>导数：
+$$
+{\displaystyle f'(x)={\begin{cases}0&amp;amp;{\text{for }}x&amp;lt;0\\1&amp;amp;{\text{for }}x\geq 0\end{cases}}}
+$$&lt;/p>
+&lt;h3 id="219带泄露线性整流函数-leaky-relu">2.1.9、带泄露线性整流函数 (Leaky ReLU)&lt;/h3>
+&lt;p>图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%B8%A6%E6%B3%84%E9%9C%B2%E7%BA%BF%E6%80%A7%E6%95%B4%E6%B5%81%E5%87%BD%E6%95%B0.png" alt="带泄露线性整流函数">&lt;/p>
+&lt;p>原函数：
+$$
+{\displaystyle f(x)={\begin{cases}0.01x&amp;amp;{\text{for }}x&amp;lt;0\\x&amp;amp;{\text{for }}x\geq 0\end{cases}}}
+$$&lt;/p>
+&lt;p>导数：
+$$
+{\displaystyle f'(x)={\begin{cases}0.01&amp;amp;{\text{for }}x&amp;lt;0\\1&amp;amp;{\text{for }}x\geq 0\end{cases}}}
+$$&lt;/p>
+&lt;h3 id="2110参数化线性整流函数-prelu">2.1.10、参数化线性整流函数 (PReLU)&lt;/h3>
+&lt;p>图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%8F%82%E6%95%B0%E5%8C%96%E7%BA%BF%E6%80%A7%E6%95%B4%E6%B5%81%E5%87%BD%E6%95%B0.png" alt="参数化线性整流函数">&lt;/p>
+&lt;p>原函数：
+$$
+{\displaystyle f(\alpha ,x)={\begin{cases}\alpha x&amp;amp;{\text{for }}x&amp;lt;0\\x&amp;amp;{\text{for }}x\geq 0\end{cases}}}
+$$&lt;/p>
+&lt;p>导数：
+$$
+{\displaystyle f'(\alpha ,x)={\begin{cases}\alpha &amp;amp;{\text{for }}x&amp;lt;0\\1&amp;amp;{\text{for }}x\geq 0\end{cases}}}
+$$&lt;/p>
+&lt;h3 id="2111指数线性函数-elu">2.1.11、指数线性函数 (ELU)&lt;/h3>
+&lt;p>图像：
+&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%8C%87%E6%95%B0%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0.png" alt="指数线性函数">&lt;/p>
+&lt;p>原函数：
+$$
+{\displaystyle f(\alpha ,x)={\begin{cases}\alpha (e^{x}-1)&amp;amp;{\text{for }}x&amp;lt;0\\x&amp;amp;{\text{for }}x\geq 0\end{cases}}}
+$$&lt;/p>
+&lt;p>导数：
+$$
+{\displaystyle f'(\alpha ,x)={\begin{cases}f(\alpha ,x)+\alpha &amp;amp;{\text{for }}x&amp;lt;0\\1&amp;amp;{\text{for }}x\geq 0\end{cases}}}
+$$&lt;/p>
+&lt;h2 id="22多变量输入激活函数">2.2、多变量输入激活函数&lt;/h2>
+&lt;h3 id="221softmax函数">2.2.1、Softmax函数&lt;/h3>
+&lt;p>原函数：
+$$
+f_{i}({\vec{x}})=\frac{e^{x_{i}}}{\sum_{j=1}^{J}e^{x_{j}}} \ 且 \ i = 1, …, J
+$$&lt;/p>
+&lt;p>导数：
+$$
+{\displaystyle {\frac{\partial f_{i}({\vec{x}})}{\partial x_{j}}}=f_{i}({\vec{x}})(\delta_{ij}-f_{j}({\vec{x}}))}
+$$&lt;/p>
+&lt;h3 id="222maxout函数">2.2.2、Maxout函数&lt;/h3>
+&lt;p>原函数：
+$$
+{\displaystyle f({\vec{x}})=\max_{i}x_{i}}
+$$&lt;/p>
+&lt;p>导数：
+$$
+{\displaystyle {\frac{\partial f}{\partial x_{j}}}={\begin{cases}1&amp;amp;{\text{for
+}}j={\underset{i}{\operatorname{argmax}}},x_{i}\\0&amp;amp;{\text{for }}j\neq{\underset{i}{\operatorname{argmax}}},x_
+{i}\end{cases}}}
+$$&lt;/p>
+&lt;h1 id="3选择激活函数">3、选择激活函数&lt;/h1>
+&lt;h2 id="31sigmoid">3.1、sigmoid&lt;/h2>
+&lt;p>Sigmoid函数曾被广泛应用，但由于其自身的一些缺陷，现在已经很少用了。现在已经不推荐使用了&lt;/p>
+&lt;h2 id="32tanh214双曲正切函数">3.2、&lt;a href="#214%E5%8F%8C%E6%9B%B2%E6%AD%A3%E5%88%87%E5%87%BD%E6%95%B0">Tanh&lt;/a>&lt;/h2>
+&lt;p>&lt;img src="https://blog.jtyoui.com/img/Pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/tanh%E4%B8%8Esigmoid%E6%AF%94%E8%BE%83.png" alt="tanh与sigmoid比较">
+tanh函数与Sigmoid函数非常相似。它实际上只是Sigmoid函数的一个放大版本。
+它基本上解决了所有值符号相同的问题，而其他属性都与sigmoid函数相同。
+函数具有连续性和可微性。你可以看到函数是非线性的，所以我们可以很容易地将误差进行反向传播。
+所以可以使用tanh来替代Sigmoid函数。
+与Sigmoid函数相比，tanh函数的梯度更陡。 使用sigmoid函数还是tanh函数取决于问题陈述中对梯度的要求。
+但是tanh函数出现了Sigmoid函数类似的问题，梯度渐趋平坦，并且值非常低。&lt;/p>
+&lt;h2 id="33relu218线性整流函数-relu">3.3、&lt;a href="#218%E7%BA%BF%E6%80%A7%E6%95%B4%E6%B5%81%E5%87%BD%E6%95%B0-relu">ReLU&lt;/a>&lt;/h2>
+&lt;p>ReLU是近几年非常受欢迎的激活函数
+ReLU是如今设计神经网络时使用最广泛的激活函数。首先，ReLU函数是非线性的，这意味着我们可以很容易地反向传播误差，并激活多个神经元。
+ReLU函数优于其他激活函数的一大优点是它不会同时激活所有的神经元。这是什么意思?如果输入值是负的，ReLU函数会转换为0，
+而神经元不被激活。这意味着，在一段时间内，只有少量的神经元被激活，神经网络的这种稀疏性使其变得高效且易于计算。
+ReLU函数也存在着梯度为零的问题。看上图，x＜0时，梯度是零，这意味着在反向传播过程中，权重没有得到更新。这就会产生死神经元，而这些神经元永远不会被激活。&lt;/p>
+&lt;h3 id="331leaky-relu219带泄露线性整流函数-leaky-relu">3.3.1、&lt;a href="#219%E5%B8%A6%E6%B3%84%E9%9C%B2%E7%BA%BF%E6%80%A7%E6%95%B4%E6%B5%81%E5%87%BD%E6%95%B0-leaky-relu">Leaky ReLU&lt;/a>&lt;/h3>
+&lt;p>Leaky ReLU函数只是一个ReLU函数的改良版本。我们看到，在ReLU函数中，x &amp;lt; 0时梯度为0，这使得该区域的神经元死亡。
+为了解决这个问题， Leaky ReLU出现了。这是它的定义：
+替换水平线的主要优点是去除零梯度。在这种情况下，梯度是非零的，所以该区域的神经元不会成为死神经元。
+与Leaky ReLU函数类似的，还有PReLU函数，它的定义与Leaky ReLU相似。
+然而， 在&lt;a href="#2110%E5%8F%82%E6%95%B0%E5%8C%96%E7%BA%BF%E6%80%A7%E6%95%B4%E6%B5%81%E5%87%BD%E6%95%B0-prelu">PReLU&lt;/a>函数中，a也是可训练的函数。神经网络还会学习a的价值，以获得更快更好的收敛。
+当Leaky ReLU函数仍然无法解决死神经元问题并且相关信息没有成功传递到下一层时，可以考虑使用PReLU函数。&lt;/p>
+&lt;h3 id="34softmax221softmax函数">3.4、&lt;a href="#221softmax%E5%87%BD%E6%95%B0">Softmax&lt;/a>&lt;/h3>
+&lt;p>softmax函数也是一种sigmoid函数，但它在处理分类问题时很方便。sigmoid函数只能处理两个类。当我们想要处理多个类时，该怎么办呢？只对单类进行“是”或“不是”的分类方式将不会有任何帮助。
+softmax函数将压缩每个类在0到1之间，并除以输出总和。它实际上可以表示某个类的输入概率。
+比如，我们输入[1.2,0.9,0.75]，当应用softmax函数时，得到[0.42,0.31,0.27]。现在可以用这些值来表示每个类的概率。
+softmax函数最好在分类器的输出层使用。&lt;/p>
+&lt;h2 id="32结果">3.2、结果&lt;/h2>
+&lt;ul>
+&lt;li>用于分类器时，Sigmoid函数及其组合通常效果更好。&lt;/li>
+&lt;li>由于梯度消失问题，有时要避免使用sigmoid和tanh函数。&lt;/li>
+&lt;li>ReLU函数是一个通用的激活函数，目前在大多数情况下使用。&lt;/li>
+&lt;li>如果神经网络中出现死神经元，那么PReLU函数就是最好的选择。&lt;/li>
+&lt;li>请记住，ReLU函数只能在隐藏层中使用。&lt;/li>
+&lt;/ul>
+&lt;h2 id="33最新的激活函数">3.3、最新的激活函数&lt;/h2>
+&lt;h3 id="switch-bsearching-for-activation-functionshttpsarxivorgabs171005941">Switch-B(&lt;a href="https://arxiv.org/abs/1710.05941">searching for activation functions&lt;/a>)&lt;/h3>
+&lt;p>Swish是Google在2017年10月16号提出的一种新型激活函数,其原始公式为:
+$$
+f(x)=x * Sigmod(x)
+$$
+变形Swish-B激活函数的公式则为
+$$
+f(x)=x * Sigmod(b * x)
+$$
+其拥有不饱和,光滑,非单调性的特征,而Google在论文中的多项测试表明Swish以及Swish-B激活函数的性能即佳,
+在不同的数据集上都表现出了要优于当前最佳激活函数的性能.&lt;/p></description></item><item><title>基本数据类型</title><link>https://blog.jtyoui.com/post/pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link><pubDate>Tue, 27 Dec 2022 15:56:00 +0800</pubDate><guid>https://blog.jtyoui.com/post/pytorch/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid><description>&lt;h1 id="1张量tensor">1、张量（Tensor）&lt;/h1>
 &lt;p>在Pytorch中处理的数据都按张量来表示，张量是一个矩阵维度的单位，表示多维矩阵。&lt;/p>
 &lt;p>Tensor有5种基本类型&lt;/p>
 &lt;ol>
@@ -327,6 +570,64 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
+&lt;/div>&lt;p>【注意】：Tensor和tensor的区别&lt;/p>
+&lt;p>大写的Tensor和小写的tensor唯一的区别是，当只传入一位数的时候，大写的表示Size，而小写的表示标量&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 大写表示Size为1，值随机的数&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Tensor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="c1"># tensor([0.])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 小写表示size为1，值是1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tensor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="c1"># tensor(1)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 大写表示Size为1*2，值随机的数&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Tensor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="c1"># tensor([[1.4013e-45, 0.0000e+00]])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 错误语法&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># print(torch.tensor(1, 2)) # 错误语法&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 小写表示Size为1*2，值是1,2，类型是整型&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tensor&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">]))&lt;/span> &lt;span class="c1"># tensor([1, 2])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 大写表示Size为1*2，值是1,2，值等价上面的小写，不过类型是默认类型 Float&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Tensor&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">]))&lt;/span> &lt;span class="c1"># tensor([1, 2])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">下面这种是等价写法
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">print(torch.Tensor([1, 2]))
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">print(torch.tensor([1., 2.]))
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
 &lt;/div>&lt;h1 id="2变量variable">2、变量（Variable）&lt;/h1>
 &lt;p>Pytorch的变量也是和张量一样，是一个比较重要的概念，这个和传统编程语言的变量不一样。这里的变量是加入了计算图，可以进行前向传播和反向传播、自动求导。
 在变量中有三个比较重要的属性（data、grad、grad_fn），通过data获取到变量里面的值，这个值其实就是张量。grad_fn表示的是这个变量的操作，比如：是通过什么四则运算
@@ -366,7 +667,7 @@
 &lt;pre>&lt;code> go get github.com/gounits/gohtml
 &lt;/code>&lt;/pre>
 &lt;h2 id="2-使用">2. 使用&lt;/h2>
-&lt;p>&lt;img src="https://blog.jtyoui.com/img/Go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2-%E7%9B%AE%E5%BD%95.png" alt="img.png">&lt;/p>
+&lt;p>&lt;img src="https://blog.jtyoui.com/img/Golang/Go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2-%E7%9B%AE%E5%BD%95.png" alt="img.png">&lt;/p>
 &lt;p>fs文件夹是存放web静态文件&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -412,8 +713,8 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://blog.jtyoui.com/img/Go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2-HTML.png" alt="img_2.png">&lt;/p>
+&lt;/div>&lt;p>&lt;img src="https://blog.jtyoui.com/img/Golang/Go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2-HTML.png" alt="img_2.png">&lt;/p>
 &lt;h2 id="3-打开浏览器">3. 打开浏览器&lt;/h2>
 &lt;pre>&lt;code>click http://localhost:8080/ 如果访问到下面，说明执行成功！
 &lt;/code>&lt;/pre>
-&lt;p>&lt;img src="https://blog.jtyoui.com/img/Go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2-%E6%89%93%E5%BC%80%E6%88%90%E5%8A%9F.png" alt="img_1.png">&lt;/p></description></item></channel></rss>
+&lt;p>&lt;img src="https://blog.jtyoui.com/img/Golang/Go%E4%BB%A3%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2-%E6%89%93%E5%BC%80%E6%88%90%E5%8A%9F.png" alt="img_1.png">&lt;/p></description></item></channel></rss>
